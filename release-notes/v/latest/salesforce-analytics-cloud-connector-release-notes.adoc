@@ -30,7 +30,7 @@ A wildcard can now be used for the Metadata File Name field when configuring the
 +
 * Added support to disable session invalidation.
 +
-* The authentication configuration now lets you disable session invalidation by checking the Disable session invalidation checkbox.
+The authentication configuration now lets you disable session invalidation by checking the Disable session invalidation checkbox.
 
 === Version 2.2.0 - Fixed in This Release
 
