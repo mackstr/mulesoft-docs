@@ -1,7 +1,7 @@
 = ServiceNow Connector Release Notes
 :keywords: servicenow, connector, release notes
 
-*April 2017*
+*February 2018*
 
 Guide:
 
@@ -10,6 +10,31 @@ Guide:
 Migration Guide: 
 
 * link:/mule-user-guide/v/3.8/servicenow-connector-5.0-migration-guide[ServiceNow Connector 5.x Migration Guide]
+
+== ServiceNow Connector 5.4.1 - February 20, 2018
+
+=== Version 5.4.1 Compatibility
+
+The ServiceNow connector 5.4.1 is compatible with:
+
+[%header%autowidth]
+|===
+|Application/Service |Version
+|Mule Runtime |3.7.0 or later
+|ServiceNow |Eureka, Fuji, Geneva, Helsinki and Istanbul
+|===
+
+=== Version 5.4.1 Features
+
+None.
+
+=== Version 5.4.1 Fixes
+
+* Fixed a bug where you were not able to select a custom table within the type combo to insert an operation in the connector.
+
+=== Version 5.4.1 Known Issues
+
+None.
 
 
 == ServiceNow Connector 5.4.0 - April 28, 2017
