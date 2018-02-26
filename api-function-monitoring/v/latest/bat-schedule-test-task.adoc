@@ -1,0 +1,29 @@
+= To Schedule API Testing
+
+BAT is deployed by default in the Production environment of Anypoint Platform when you run the bat login command. This procedure describes how to schedule an API test to run in Anypoint Platform once, and repeatedly using a cron job.
+
+You can also set up Jenkins to run tests using BAT and Spinnaker to analyze the results.
+
+. Login to Anypoint Platform using BAT:
++
+`bat login --username=bat-demo --password=Bat1234`
++
+This action sets the credentials file.
++
+. Create a monitor with GET to an endpoint. For example:
++
+`bat schedule endpoint http://apimon.cloudhub.io/users --init-folder`
++
+. List the schedule of tests.
++
+`bat schedule list`
++
+. Schedule a test to run repeated using a cron expression. For example, run the test at 12:00 PM every day for one month:
++
+`bat schedule create --cron="0 0 12 1/1 * ? *"`
+
+== To Configure Jenkins for BAT Testing
+
+. TBD
+
+. 

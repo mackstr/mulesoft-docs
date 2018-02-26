@@ -1,74 +1,185 @@
-= BAT Report Reference
+= BAT Report Integration Reference
+
+BAT generates basic types of reports in JSON and HTML without any configuration. When you execute tests on the command line, the path to the reports appears in the output. For example:
+
+----
+bat
+BAT Version: 0.3.340
+#  File: ./tests/step.0.dwl
+...
+#  Reporter: bat/Reporters/JSON.dwl >> /var/folders/w5/_cc_5_z12pq3qnymf3f0zh840000gq/T/bat_report_20180225145000.json
+#  Reporter: bat/Reporters/HTML.dwl >> /var/folders/w5/_cc_5_z12pq3qnymf3f0zh840000gq/T/bat_report_20180225145000.html
+----
+
+image::bat-html-report.png[]
 
 You can configure BAT for use with a number monitoring systems for reporting. For example:
 
-* SUMO
+* New Relic
 * PagerDuty
 * Slack
-* New Relic
+* SUMO
 
-To generate a specific report you modify the bat.yaml, in the reporters section (reporters: ) you can add Sumo, New Relic, PagerDuty and Slack.
+You specify report generation in the reporters section of the bat.yaml. For example, the following reporters section configures BAT to generate HTML and JSON reports:
 
-== SUMO
-To use SUMO, you create a collection and specify it in the bat.yaml. The collection can be shared with other tests or used only as a monitor. At the end of each execution BAT generates a post to SUMO that sends the trade-off information of requests and responses that were executed during the test. This enables you to see expected results and how the test behaves.
+----
+reporters:
 
-You must provide the endpoint of the collection.
+  - file: reporters/HTML.dwl
+    outFile: report.html
+  - file: bat/Reporters/JSON.dwl
+    outFile: results/output.json
+----
 
-image::sumo-report.png[]
+== New Relic
 
-*Bat.yaml Example*
+Using New Relic with API functional monitoring, you can determine the times of each test, detect performance loss, and schedule alerts.
 
-  - file: bat/Reporters/SumoLogic.dwl 
+New Relic has a plugin configured for BAT that can capture the metrics from test suites. In New Relic, click Plugins to see the configuration.
+
+To use the plugin to capture metrics, you need to configure your bat.yaml by adding the following information:
+
+* An output directory
+* Your NEW_RELIC_LICENSE_KEY  
+
+=== To Configure New Relic Reporting
+
+// . Create a directory in your bat directory for saving the generated reports. For example, create a /reporters directory.
+. Obtain a license key. 
+* Go to the New Relic Account Settings. 
+* Copy your license key from the right sidebar under Account Summary.
+. Add the license key to your bat.yaml file:
++
+----
+reporters:
+  - file: /reporters/NewRelic.dwl
+    outFile: /dev/null
     options:
-      SUMO_ENDPOINT: https://endpoint1.collection.us2.sumologic.com/receiver/v1/http/ZaVnC4dhaV1nH-hvpNewI5GSjsyUfU07BnldpFR3VXbea59pGNwAHVMs4FMS2ItsOzklsnLsQLrDS3VXNXLKozhrnL6aFaCAQJt2FHYVy6FkXSZyrRsxSw==
+      NEW_RELIC_LICENSE_KEY: "xxxxxxxxxxxxxxx"
+----
++
+New test result data appears in New Relic after you run each test.
++
+image::new-relic-metrics.png[]
 
 == PagerDuty
 
 The integration of BAT with PagerDuty generates an incident when a test fails and triggers configured PagerDuty alerts. If a monitor always fails with the same error, BAT does not generate a new issue, but instead ignores these errors.
 
-In the bat.yaml, you have to include the Service Key for the integration.
+== To Configure PagerDuty Reporting 
 
+. In PagerDuty, configure an integration:
+* Configure > Services.
++
 image::pagerduty.png[]
-
-Bat.yaml example:
-
++
+* Select the integration. For example, select bat-monitoring.
++
+image::integrations-pagerduty.png[]
++
+. Copy the integration key and add it to your bat.yaml file:
++
+*Bat.yaml example*
++
+----
+reporters:
   - file: bat/Reporters/PagerDuty.dwl
     options:
-      SERVICE_KEY: "500718897e474978aaaba7942156b89f"
+      SERVICE_KEY: "xxxxxxxxxxxxxxxxxxx"
+----
++
+Reports about failed tests appear in PagerDuty.
+
+image::pagerduty-report.png[]
 
 == Slack
 
-You can integrate BAT with Slack to generate alerts in slack that sends messages to a specific channel through a webhook. First, you create the webhook, and in the bat.yaml the url of the webhook as a parameter. The alert notification occurs in the case of failure and provides the name of the suite in which the error occurs.
+You can integrate BAT and Slack to generate alerts in slack. You send messages to a specific channel through a webhook. 
 
-You can generate the integration in slack following these steps:
+=== To Configure Test Notification in Slack
 
-In the slack App Directory
-
-image::slack1.png[]
-
-image::slack2-3.png[]
-
-Bat.yaml example:
-
+. Create the webhook:
+* On Slack, go to your organization’s app directory page at yourorg.slack.com/apps.
+* Search for Incoming WebHooks and add a configuration.
++
+image::incoming-webhooks.png[]
++
+. Choose or create a channel to post notifications to.
++
+image::post-to-channel.png[]
++
+* Copy the webhook URL of your new configuration.
++
+image::webhook-url.png[]
++
+. In the bat.yaml, add the url of the webhook as a parameter. 
++
+----
+metadata:
+  slack_channel: bat-bot
+...
+reporters:
   - file: bat/Reporters/Slack.dwl
     outFile: output.json
     options:
-      SLACK_WEBHOOK: "https://hooks.slack.com/services/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"
+      SLACK_WEBHOOK: "yourwebhook-URL"
+----
++ 
+The alert notification occurs in the case of failure and provides the name of the suite in which the error occurs.
 
-== New Relic
+image::bat-demo-failed.png[]
 
-A BAT plug-in is configured in New Relic that receives the metrics of the different suites. You can detect the times of each test and whether or not there is a loss of performance. The New Relic report needs the NEW_RELIC_LICENSE_KEY to  know where to send the metrics.
 
-The following screenshot shows the location of the license key:
+////
+How about the metadata in bat demo?
 
-image::new-relic.png[]
+BAT Version: 0.3.340
+*** Error ***
+while parsing a block mapping
+ in 'reader', line 1, column 1:
+    files:
+    ^
+expected <block end>, but found BlockEntry
+ in 'reader', line 26, column 1:
+    - file: bat/Reporters/Slack.dwl
+    ^
 
-Bat.yaml example:
+ at [Source: java.io.BufferedInputStream@327514f; line: 26, column: 1]
+////
 
-  - file: bat/Reporters/NewRelic.dwl
-    outFile: /dev/null
+
+== Sumo Logic
+
+To use Sumo Logic, you create a collection and specify it in the bat.yaml. The collection can be shared with other tests or used only as a monitor. At the end of each execution, BAT generates a post to SUMO that sends the trade-off information of requests and responses that were executed during the test. This enables you to see expected results and how the test behaves.
+
+You must provide the endpoint of the collection.
+
+image::sumo-report.png[]
+
+You can use BAT to post a log in the specified collection, and then you can create dashboards.
+
+image::sumo-collection.png[]
+
+=== To Integrate Sumo and BAT
+
+. On Sumo Logic, use the Setup Wizard to Set Up Streaming Data.
++
+image::sumo-setup.png[]
+. Choose Your Custom App > HTTP Source or All Other Sources > HTTP Source and fill out the source category.
+. Copy the HTTP source and implement the Sumo Logic integration in your bat.yaml file:
++
+----
+reporters:
+  - file: bat/Reporters/SumoLogic.dwl 
     options:
-      NEW_RELIC_LICENSE_KEY: "xxxxxxxxxxxxxxx"
+      SUMO_ENDPOINT: https://endpoint1.collection.us2.sumologic.com/receiver/v1/http/ZaVnC4dhaV1nH-hvpNewI5GSjsyUfU07BnldpFR3VXbea59pGNwAHVMs4FMS2ItsOzklsnLsQLrDS3VXNXLKozhrnL6aFaCAQJt2FHYVy6FkXSZyrRsxSw==
+----
++
+In a few moments, the test results appear in Sumo Logic under Log Search.
++
+image::sumo-results.png[]
+
+
 
 
 

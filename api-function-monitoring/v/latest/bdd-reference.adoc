@@ -1,12 +1,12 @@
 = BDD Test Writing Language Reference
 
-Behavior Driven Development (BDD) is the language for writing tests to run using bat. BDD is an embedded domain specific language (EDSL) that resembles other testing frameworks, such as Mocha and Jasmine.
+Behavior Driven Development (BDD) is the syntax for writing BAT tests for processing in DataWeave. BDD is an embedded domain specific language (EDSL) that resembles other testing frameworks, such as Mocha and Jasmine.
 
-The following statement is required:
+The following statement is required in each BAT test:
 
 `import * from bat::BDD`
 
-This statement imports the Domain Specific Language (DSL) testing library BDD.dwl, which defines words you frequently use when writing, such as describe, it, GET, POST, and sleep)
+This statement imports the Domain Specific Language (DSL) testing library BDD.dwl, which defines words you frequently use when writing, such as describe, it, GET, POST, and sleep).
 
 This statement imports common matchers, such as mustEqual, mustMatch, every, oneOf, and assert.
 
@@ -79,15 +79,15 @@ describe `Demo scenario` in [
 ]
 ----
 
-A test file must contain at least one step. The following example performs a `GET http://httpbin.com/get` and an [assertion].
+A test suite must contain at least one test (.dwl) file. 
 
 == Test Blocks
 
 Test blocks make the test more readable. You can write every test block as function a call or custom interpolation. 
 
-=== Test Functions
+=== Test Keywords
 
-You use the following functions, which follow Fowler's _GivenWhenThen_ structure, in tests:
+You use the following keywords and follow Fowler's _GivenWhenThen_ structure, in tests:
 
 [%header,cols="3*a"]
 |===
@@ -106,7 +106,7 @@ You use the following functions, which follow Fowler's _GivenWhenThen_ structure
 
 === Skipping a Test Block
 
-Test blocks also have a shorthand name to _skip the block_ described as `x<name>`. For example, the skipped version of `describe` is `xdescribe`.
+Test blocks have a shorthand name to _skip the block_ described as `x<name>`. For example, the skipped version of `describe` is `xdescribe`.
 
 [source,code,linenums]
 ----
@@ -299,7 +299,7 @@ describe `update project names` in [
 ]
 ----
 
-== Executing Steps Selectively with `assuming`
+== Executing Steps Selectively
 
 The `assuming` function, which skips the test if the result is false, has the following signature:
 

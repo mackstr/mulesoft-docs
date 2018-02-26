@@ -1,4 +1,6 @@
-= BAT Command Reference
+= BAT CLI Reference
+
+The BAT CLI provides a command line utility that you use to run tests locally and schedule monitors for continuous API testing. You can schedule tests in the cloud using the CLI-xAPI.  The BAT CLI is integrated with Anypoint Platform.
 
 This reference covers the syntax and key options you can use with the BAT command. Using the BAT command, you debug and run tests, get credentials for scheduling tests, schedule tests, list test schedules, and perform other operations.
 
@@ -69,14 +71,17 @@ Return the token for accessing Anypoint Platform in the credentials file. Requir
 +
 Generate a post with the machine name and create a dummy target.
 +
+** `schedule create [--cron="<expression>"]
++
+Create a scheduler using a cron expression and generating a zip that includes the tests and all the files. By default, if a cron expression is not entered, the default of 15 minutes takes effect.
++
 ** `schedule list`
 +
 List all the schedulers in a particular enviroment.
 +
-** `schedule create`
+** schedule endpoint <URL> --init-folder
 +
-Create a scheduler using a cron expression of 15 minutes and generating a zip that includes the tests and all the files.
-+
+Create a monitor and store TBD>
 ** `whoami`
 +
 Sends Anypoint Platform connection information to standard output.
@@ -88,7 +93,8 @@ Value is an Anypoint Platform user name.
 ** `--password=<value>` 
 +
 Value is an Anypoint Platform password.
-+
+
+////
 ** `--profile=<value>`
 +
 Profile is an arbitrary identifier, such as *devx*, that sets the profile for accessing an Anypoint Platform location. DOC NOTE: IS profile A SERVER ALIAS? 
@@ -96,6 +102,7 @@ Profile is an arbitrary identifier, such as *devx*, that sets the profile for ac
 ** `bat --env=<val>`
 +
 Value specifies an environment in your organization that specifies an environment for running tests using subsequent bat commands. The default environment is used if not specified.
+////
 
 == BAT Command Examples
 
