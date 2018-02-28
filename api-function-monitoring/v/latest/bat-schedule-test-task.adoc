@@ -1,24 +1,20 @@
 = To Schedule Testing and Monitoring
 
-<Notes for MuleSoft users, mainly me, about how to make things work will be removed for release.>
-
 BAT is deployed by default in the Production environment of Anypoint Platform when you execute the bat login command. After deploying BAT, you execute a `bat schedule <options>` command to create a monitor in Anypoint Platform. The monitor collects information about the scheduled execution of the test. To obtain this information, you need to set up a third-party reporting tool as described in the linked topic.
 
-This procedure describes how to schedule, run, and monitor an API test in Anypoint Platform once and repeatedly using a cron job.
+This procedure describes how to schedule, run, and monitor an API test in Anypoint Platform once and also repeatedly using a cron job.
 
-. Login to Anypoint Platform using BAT:
+. Login to Anypoint Platform using BAT. For example:
 +
 `bat login --username=<value> --password=<value>`
 +
-Use your Anypoint Platform user name and password. Internal MuleSoft users need to include bat login options `--bat-env=<value> --profile=<value>`. This action sets the credentials file.
-+
-. Create a schedule using the default, every 5 minutes, and monitor the testing. Provide an arbitrary endpoint URL and specify the current directory by using --init-folder to store scheduling information. For example:
+. Create a schedule using the default, every 5 minutes, and monitor the testing. Provide an arbitrary endpoint URL and optionally specify the current directory by using --init-folder to store scheduling information. For example:
 +
 `bat schedule endpoint http://www.example.com --init-folder`
 +
-Internal MuleSoft users need to include bat login option  --profile=<value>`.
+The schedule is published to Exchange using the default login profile.
 +
-Output that looks something like this appears on Mac OSX:
+Output looks something like this on Mac OSX:
 +
 ----
 BAT Version: 0.3.340
@@ -57,4 +53,5 @@ scheduleId: 99c24a04-b82b-4366-b02b-4682fa405ead
 
 == See Also
 
-* link:/api-function-monitoring/bat-report-reference
+** link:/api-function-monitoring/bat-command-reference[BAT Command Reference]
+** link:/api-function-monitoring/bat-report-reference[BAT Report Integration Reference]
