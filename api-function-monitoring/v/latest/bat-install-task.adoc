@@ -1,6 +1,6 @@
 = To Install BAT
 
-The Bash Automated Testing (BAT) CLI wrapper is a command line wrapper that you install to execute API tests. 
+The Blackbox Automated Testing (BAT) CLI wrapper is a command line wrapper that you install to execute API tests. 
 
 Run the following command to install the BAT CLI wrapper:
 

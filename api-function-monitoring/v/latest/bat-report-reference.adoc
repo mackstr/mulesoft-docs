@@ -1,6 +1,6 @@
 = BAT Report Integration Reference
 
-BAT generates basic types of reports in JSON and HTML without any configuration. When you execute tests on the command line, the path to the reports appears in the output. For example:
+BAT generates basic types of reports locally in JSON and HTML without any configuration. When you execute tests, the path to the reports appears in the output. For example:
 
 ----
 bat
@@ -13,39 +13,28 @@ BAT Version: 0.3.340
 
 image::bat-html-report.png[]
 
-You can configure BAT for use with a number monitoring systems for reporting. For example:
+You can configure BAT for use with a number reporting systems. For example:
 
 * New Relic
 * PagerDuty
 * Slack
 * SUMO
 
-You specify report generation in the reporters section of the bat.yaml. For example, the following reporters section configures BAT to generate HTML and JSON reports:
-
-----
-reporters:
-
-  - file: reporters/HTML.dwl
-    outFile: report.html
-  - file: bat/Reporters/JSON.dwl
-    outFile: results/output.json
-----
+You specify report generation in the reporters section of the bat.yaml. 
 
 == New Relic
 
 Using New Relic with API functional monitoring, you can determine the times of each test, detect performance loss, and schedule alerts.
 
-New Relic has a plugin configured for BAT that can capture the metrics from test suites. In New Relic, click Plugins to see the configuration.
-
-To use the plugin to capture metrics, you need to configure your bat.yaml by adding the following information:
+New Relic has a plugin configured for BAT that can capture the metrics from test suites. To use the plugin to capture metrics, you need to configure your bat.yaml by adding the following information:
 
 * An output directory
 * Your NEW_RELIC_LICENSE_KEY  
 
-=== To Configure New Relic Reporting
+=== To View Reports
 
-// . Create a directory in your bat directory for saving the generated reports. For example, create a /reporters directory.
-. Obtain a license key. 
+. Create a reporters directory for saving the generated reports on the save level as your tests directory and bat.yaml file.
+. Obtain a New Relic license key. 
 * Go to the New Relic Account Settings. 
 * Copy your license key from the right sidebar under Account Summary.
 . Add the license key to your bat.yaml file:
@@ -58,6 +47,15 @@ reporters:
       NEW_RELIC_LICENSE_KEY: "xxxxxxxxxxxxxxx"
 ----
 +
+Schedule a test and create a monitor.
++
+. Go to New Relic, and click Plugins. 
++
+The BAT plugin information appears.
+. Click the test suite name.
++
+image::bat-plugin.png[]
+
 New test result data appears in New Relic after you run each test.
 +
 image::new-relic-metrics.png[]

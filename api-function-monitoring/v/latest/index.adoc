@@ -1,9 +1,9 @@
 = API Functional Monitoring
 
-* link:/api-function-monitoring/[API Functional Monitoring]
 ** link:/api-function-monitoring/api-monitor-concept[About API Functional Monitoring]
 ** link:/api-function-monitoring/bat-install-task[To Install BAT]
-** link:/api-function-monitoring/bat-workflow-test[Workflow: Test an API Using API Monitoring]
+** link:/api-function-monitoring/bat-workflow-test[Workflow: Test an API Using API Functional Monitoring]
+** link:/api-function-monitoring/bat-schedule-test-task[To Schedule a Test]
 ** link:/api-function-monitoring/bat-command-reference[BAT Command Reference]
 ** link:/api-function-monitoring/bat-report-reference[BAT Report Integration Reference]
 ** link:/api-function-monitoring/bdd-reference[BDD Test Writing Language Reference]

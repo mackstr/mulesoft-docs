@@ -52,4 +52,4 @@ Next, link:/[Run tests in the BAT Playground].
 
 == See Also
 
-** link:/api-function-monitoring/bat-workflow-test[Workflow: Test an API Using API Monitoring]
+** link:/api-function-monitoring/bat-workflow-test[Workflow: Test an API Using API Functional Monitoring]
