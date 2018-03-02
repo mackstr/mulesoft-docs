@@ -55,7 +55,7 @@ The BAT plugin information appears.
 . Click the test suite name.
 +
 image::bat-plugin.png[]
-
++
 New test result data appears in New Relic after you run each test.
 +
 image::new-relic-metrics.png[]

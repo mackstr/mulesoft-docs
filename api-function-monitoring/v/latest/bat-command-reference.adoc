@@ -65,11 +65,11 @@ Return the token for accessing Anypoint Platform in the credentials file. Requir
 +
 Generate a post with the machine name and create a dummy target.
 +
-** `schedule create [--cron="<expression>"]
+** `schedule create [--cron="<expression>"]`
 +
 Create a scheduler using a cron expression and generating a zip that includes the tests and all the files. By default, if a cron expression is not entered, the default of 15 minutes takes effect.
 +
-** schedule endpoint <arbitrary-URL> [--profile=<value>] [--init-folder]
+** `schedule endpoint <arbitrary-URL> [--profile=<value>] [--init-folder]`
 +
 Create a monitor in Exchange of using an arbitrary URL, for example `+http://example.com+`. Optionally, store generated exchange.json and main.dml in the currrent directory.
 +
@@ -87,7 +87,7 @@ Value is an Anypoint Platform keyword.
 
 ** `--profile=<value>`
 +
-Profile is 1) the name of a profile for accessing an Anypoint Platform location and retaining the login information between BAT sessions. Using this option eliminates the need to relogin between sessions. Optional. 2) the name of a profile for scheduling an endpoint that can be different from the BAT login profile you used. By default, the BAT uses the login profile for scheduling. Optional.
+Profile is 1) the name of a profile for accessing an Anypoint Platform location and retaining the login information between BAT sessions. Using this option eliminates the need to relogin between sessions. Optional. 2) the name of a profile for scheduling an endpoint that can be different from the BAT login profile you used. By default, BAT uses the login profile for scheduling. Optional.
 +
 ** `--init-folder`
 +
